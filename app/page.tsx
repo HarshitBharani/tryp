@@ -1,13 +1,25 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import { DataTable } from "@/components/DataTable";
-
+export type Data = {
+  timeStamp: string;
+  purchaseId: string;
+  mail: string;
+  name: string;
+  source: string;
+  status: string;
+  select: string;
+};
 export default async function Page() {
-  const data = await getData();
-
+  const data: Data[] = await getData();
+  console.log(Object.keys(data[0]));
   return (
     <main className={styles.main}>
-      <h1>Table Data</h1>
+      <DataTable
+        rows={data}
+        caption="Boookings"
+        headers={Object.keys(data[0])}
+      />
     </main>
   );
 }
